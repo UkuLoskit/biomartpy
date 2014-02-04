@@ -214,15 +214,13 @@ def make_lookup(mart_name, dataset, attributes, filters=None, values=None,
         raise ValueError('unhandled case')
 
 
-    filters, values = _filter_and_values_to_RList(filter_value_dict)
+    #filters, values = _filter_and_values_to_RList(filter_value_dict)
 
     mart = r.useDataset(dataset, mart=r.useMart(mart_name))
     attributes = robjects.StrVector(attributes)
 
     results = r.getBM(
         attributes=attributes,
-        filters=filters,
-        values=values,
         uniqueRows=unique_rows,
         mart=mart)
     return rpy2_to_pandas(results, index_col=0)
